@@ -13,4 +13,15 @@ This project was a collaborative at home game jam.
 - Meows by Buttercup
 - Programming by David Jones
 
-![Bubs](https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/bubs.png)
+### Contributors
+
+Left to right
+- Buttercup (Aka Bubs)
+- McQuistan
+- David
+
+<p align="left">
+<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/assets/bubs.png" width="200" />
+<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/assets/bubs.png" width="200" />
+<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/assets/bubs.png" width="200" />
+</p>
