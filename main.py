@@ -1,6 +1,6 @@
 import pygame
 
-from Scenes import MainMenuScene, GameOverScene, GameScene
+from scenes import MainMenuScene, GameOverScene, GameScene
 from contants import WIDTH, HEIGHT, MAINMENU_SCENE, GAME_SCENE, GAMEOVER_SCENE
 
 def main():
