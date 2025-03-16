@@ -30,8 +30,9 @@ class Scene:
 
 class GameOverScene(Scene):
 
-    def __init__(self, clock, width, height):
+    def __init__(self, clock, width, height, score):
         super().__init__(clock, width, height)
+        self.score = score
         self.click = False
         self.rotation = 0
         self.rotation_direction = 1
@@ -81,6 +82,7 @@ class GameOverScene(Scene):
         #draw_text('GAME OVER', self.font, (0, 0, 0), screen, self.width * 0.5 - 55, 20)
         pygame.draw.rect(screen, (255, 150, 150), self.play_again_btn)
         draw_text('MAIN MENU', self.font, (0, 0, 0), screen, self.play_again_btn.x + 40, self.play_again_btn.y + 15)
+        draw_text(f'Score: {self.score}', self.font, (0, 0, 0), screen, self.play_again_btn.x + 40, self.play_again_btn.y + 80)
 
 
 class MainMenuScene(Scene):
@@ -141,7 +143,7 @@ class GameScene(Scene):
         super().__init__(clock, width, height)
         self.num_cookies = 7
         self.score = 0
-        self.timer_sec = 5
+        self.timer_sec = 10
         self.pos = pygame.mouse.get_pos()
 
         # setup our sounds
@@ -193,7 +195,7 @@ class GameScene(Scene):
             if self.timer_sec > 0:
                 self.timer_sec -= 1
             else:
-                pygame.event.post(pygame.event.Event(GAMEOVER_SCENE))
+                pygame.event.post(pygame.event.Event(GAMEOVER_SCENE, {"score": self.score}))
         if event.type == pygame.MOUSEBUTTONUP:
             self.pos = pygame.mouse.get_pos()
             # get a list of all cookie sprites that are under the mouse cursor
@@ -223,9 +225,11 @@ class GameScene(Scene):
         self.all_sprites.draw(screen)
 
         # Draw the score to the screen
-        score_text = self.font.render(f'Score: {self.score}', True, (255, 255, 255))
+        pygame.draw.rect(screen, (255, 150, 150), pygame.Rect(0, 0, 120, 40))
+        score_text = self.font.render(f'Score: {self.score}', True, (0, 0, 0))
         screen.blit(score_text, (10, 10))
 
         # Draw the timer to the screen
-        timer_text = self.font.render(time.strftime('%M:%S', time.gmtime(self.timer_sec)), True, (255, 255, 255))
-        screen.blit(timer_text, (screen.width - 80, 10))
+        pygame.draw.rect(screen, (255, 150, 150), pygame.Rect(screen.width - 80, 0, 80, 40))
+        timer_text = self.font.render(time.strftime('%M:%S', time.gmtime(self.timer_sec)), True, (0, 0, 0))
+        screen.blit(timer_text, (screen.width - 60, 10))

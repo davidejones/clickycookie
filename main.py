@@ -24,7 +24,7 @@ def main():
                 currentScene = GameScene(clock, WIDTH, HEIGHT)
             elif event.type == GAMEOVER_SCENE:
                 currentScene.cleanup()
-                currentScene = GameOverScene(clock, WIDTH, HEIGHT)
+                currentScene = GameOverScene(clock, WIDTH, HEIGHT, event.score)
             else:
                 currentScene.on_event(event)
 
