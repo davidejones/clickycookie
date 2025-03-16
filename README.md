@@ -27,7 +27,7 @@ Left to right
 - David
 
 <p align="left">
-<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/assets/bubs.png" width="150" />
-<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/assets/bubs.png" width="150" />
-<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/assets/david.jpg" width="150" />
+<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/bubs.png" width="150" />
+<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/bubs.png" width="150" />
+<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/david.jpg" width="150" />
 </p>
