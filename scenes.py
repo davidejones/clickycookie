@@ -1,6 +1,6 @@
 import math
 import time
-from random import randrange
+from random import randrange, shuffle
 
 import pygame
 
@@ -141,7 +141,7 @@ class GameScene(Scene):
 
     def __init__(self, clock, width, height):
         super().__init__(clock, width, height)
-        self.num_cookies = 7
+        self.max_pool_size = 20
         self.score = 0
         self.timer_sec = 10
         self.pos = pygame.mouse.get_pos()
@@ -159,18 +159,20 @@ class GameScene(Scene):
 
         # setup our sprites
         self.all_sprites = pygame.sprite.LayeredDirty()
-        for i in range(self.num_cookies):
-            if i == 0:
+        for i in range(self.max_pool_size):
+            obj_num = randrange(0, 3, 1)
+            if obj_num == 0:
                 bomb = Bomb()
-                bomb.set_random_location(0, 600, 0, 800)
+                #bomb.set_random_location(0, 600, 0, 800)
+                bomb.rect.topleft = (0, 900)
                 self.all_sprites.add(bomb)
             else:
-                cookie_choice = randrange(0, 2)
-                if cookie_choice == 1:
+                if obj_num == 1:
                     cookie = ChocCookie()
                 else:
                     cookie = SugarCookie()
-                cookie.set_random_location(0, 600, 0, 800)
+                # cookie.set_random_location(0, 600, 0, 800)
+                cookie.rect.topleft = (0, 900)
                 self.all_sprites.add(cookie)
 
         self.paw = Paw()
@@ -181,9 +183,8 @@ class GameScene(Scene):
 
     def cleanup(self):
         super().cleanup()
-        self.num_cookies = 7
         self.score = 0
-        self.timer_sec = 5
+        self.timer_sec = 10
         self.cat_snd1.stop()
         self.cat_snd2.stop()
         self.cat_snd3.stop()
@@ -192,6 +193,13 @@ class GameScene(Scene):
     def on_event(self, event):
         super().on_event(event)
         if event.type == TIMER_EVENT:
+            # add cookies/bombs to game if necessary
+            filtered_sprites = [s for s in self.all_sprites if isinstance(s, Cookie) and not s.is_active]
+            for s in filtered_sprites:
+                s.set_random_location(0, 600, 0, 800)
+                s.is_active = True
+                break
+            # reduce timer or trigger end game event
             if self.timer_sec > 0:
                 self.timer_sec -= 1
             else:
@@ -214,6 +222,7 @@ class GameScene(Scene):
     def update(self, dt):
         # event updates for sprites
         self.all_sprites.update(dt=dt)
+        #self.paw.update(dt=dt)
 
     def draw(self, screen):
         super().draw(screen)
@@ -223,6 +232,7 @@ class GameScene(Scene):
 
         # render sprites
         self.all_sprites.draw(screen)
+        self.paw.draw(screen)
 
         # Draw the score to the screen
         pygame.draw.rect(screen, (255, 150, 150), pygame.Rect(0, 0, 120, 40))

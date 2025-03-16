@@ -10,6 +10,8 @@ class Cookie(pygame.sprite.DirtySprite):
         super().__init__(*groups)
         self.rect = None
         self.name = ""
+        self.visible = 1
+        self.is_active = False
 
     def hide(self):
         self.visible = 0
@@ -41,6 +43,12 @@ class ChocCookie(Cookie):
         self.image, self.rect = load_image("assets/cookie.png", None, 0.25)
 
 
+class Bomb(Cookie):
+    def __init__(self, *groups):
+        super().__init__(*groups)
+        self.image, self.rect = load_image("assets/dabomb.png", None, 0.3)
+
+
 class Paw(pygame.sprite.DirtySprite):
     def __init__(self, *groups):
         super().__init__(*groups)
@@ -65,6 +73,7 @@ class Paw(pygame.sprite.DirtySprite):
 
     def update(self, *args, **kwargs):
         dt = kwargs.get("dt")
+        super().update(*args, **kwargs)
         if self.returning:
             #screen = kwargs.get("screen")
             self.particles.append([[self.rect.centerx, self.rect.y], [random.randint(0, 20) / 10 - 1, -2], random.randint(4, 30)])
@@ -91,19 +100,11 @@ class Paw(pygame.sprite.DirtySprite):
             if self.rect.top > 800:
                 self.returning = False
                 self.grabbing = False
+                self.target_cookie.is_active = False
                 self.target_cookie = None
-                # destroy cookie?
         self.dirty = 1
 
     def draw(self, screen):
         for particle in self.particles:
-            pygame.draw.circle(screen, (239, 239, 239), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
+            pygame.draw.circle(screen, (200, 200, 200), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
 
-
-class Bomb(Cookie):
-    def __init__(self, *groups):
-        super().__init__(*groups)
-        self.image, self.rect = load_image("assets/dabomb.png", None, 0.3)
-
-    # def update(self, *args, **kwargs):
-    #     pass
