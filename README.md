@@ -28,6 +28,6 @@ Left to right
 
 <p align="left">
 <img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/bubs.png" width="150" />
-<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/bubs.png" width="150" />
+<img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/mj.jpg" height="200" />
 <img src="https://raw.githubusercontent.com/davidejones/clickycookie/davidejones/init/david.jpg" width="150" />
 </p>
